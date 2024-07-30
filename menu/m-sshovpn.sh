@@ -732,6 +732,8 @@ read -n 1 -s -r -p "Press any key to back on menu"
 m-sshovpn
 }
 function cek(){
+#!/bin/bash
+
 TIMES="10"
 CHATID=$(cat /etc/per/id)
 KEY=$(cat /etc/per/token)
@@ -740,92 +742,118 @@ ISP=$(cat /etc/xray/isp)
 CITY=$(cat /etc/xray/city)
 domain=$(cat /etc/xray/domain)
 author=$(cat /etc/profil)
+
 echo -e "$COLOR1╭═════════════════════════════════════════════════╮${NC}"
-echo -e "$COLOR1│${NC} ${COLBG1}             ${WH}• SSH ACTIVE USERS •              ${NC} $COLOR1│ $NC"
+echo -e "$COLOR1│${NC} ${COLBG1} ${WH}• SSH ACTIVE USERS •                          ${NC} $COLOR1│ $NC"
 echo -e "$COLOR1╰═════════════════════════════════════════════════╯${NC}"
 echo -e "$COLOR1╭═════════════════════════════════════════════════╮${NC}"
-echo -e ""
+echo -e "$COLOR1│${NC}  No   Username      IP Login   Limit            $COLOR1│${NC}"
+echo -e "$COLOR1╰═════════════════════════════════════════════════╯${NC}"
+
 rm -rf /tmp/ssh2
-systemctl restart ws-stunnel > /dev/null 2>&1
-sleep 3
+#systemctl restart ws-stunnel > /dev/null 2>&1
+#sleep 3
+
 if [ -e "/var/log/auth.log" ]; then
-LOG="/var/log/auth.log";
+    LOG="/var/log/auth.log"
 fi
+
 cat /etc/passwd | grep "/home/" | cut -d":" -f1 > /etc/user.txt
 username1=( `cat "/etc/user.txt" `);
 i="0";
 for user in "${username1[@]}"
 do
-username[$i]=`echo $user | sed 's/'\''//g'`;
-jumlah[$i]=0;
-i=$i+1;
+    username[$i]=`echo $user | sed 's/'\''//g'`;
+    jumlah[$i]=0;
+    i=$i+1;
 done
-journalctl -u dropbear --since "100 minutes ago" | grep -i "Password auth succeeded" > /tmp/log-db.txt
+
+journalctl -u dropbear --since "2000 minutes ago" | grep -i "Password auth succeeded" > /tmp/log-db.txt
 proc=( `ps aux | grep -i dropbear | awk '{print $2}'`);
 for PID in "${proc[@]}"
 do
-cat /tmp/log-db.txt | grep "dropbear\[$PID\]" > /tmp/log-db-pid.txt
-NUM=`cat /tmp/log-db-pid.txt | wc -l`;
-USER=`cat /tmp/log-db-pid.txt | awk '{print $10}' | sed 's/'\''//g'`;
-IP=`cat /tmp/log-db-pid.txt | awk '{print $12}'`;
-if [ $NUM -eq 1 ]; then
-TIME=$(date +'%H:%M:%S')
-echo "$USER $TIME : $IP" >>/tmp/ssh2
-i=0;
-for user1 in "${username[@]}"
-do
-if [ "$USER" == "$user1" ]; then
-jumlah[$i]=`expr ${jumlah[$i]} + 1`;
-pid[$i]="${pid[$i]} $PID"
-fi
-i=$i+1;
+    cat /tmp/log-db.txt | grep "dropbear\[$PID\]" > /tmp/log-db-pid.txt
+    NUM=`cat /tmp/log-db-pid.txt | wc -l`;
+    USER=`cat /tmp/log-db-pid.txt | awk '{print $10}' | sed 's/'\''//g'`;
+    IP=`cat /tmp/log-db-pid.txt | awk '{print $12}'`;
+    if [ $NUM -eq 1 ]; then
+        TIME=$(date +'%H:%M:%S')
+        echo "$USER $TIME : $IP" >>/tmp/ssh2
+        i=0;
+        for user1 in "${username[@]}"
+        do
+            if [ "$USER" == "$user1" ]; then
+                jumlah[$i]=`expr ${jumlah[$i]} + 1`;
+                pid[$i]="${pid[$i]} $PID"
+            fi
+            i=$i+1;
+        done
+    fi
 done
-fi
-done
+
 cat $LOG | grep -i sshd | grep -i "Accepted password for" > /tmp/log-db.txt
 data=( `ps aux | grep "\[priv\]" | sort -k 72 | awk '{print $2}'`);
 for PID in "${data[@]}"
 do
-cat /tmp/log-db.txt | grep "sshd\[$PID\]" > /tmp/log-db-pid.txt;
-NUM=`cat /tmp/log-db-pid.txt | wc -l`;
-USER=`cat /tmp/log-db-pid.txt | awk '{print $9}'`;
-IP=`cat /tmp/log-db-pid.txt | awk '{print $11}'`;
-if [ $NUM -eq 1 ]; then
-TIME=$(date +'%H:%M:%S')
-echo "$USER $TIME : $IP" >>/tmp/ssh2
-i=0;
-for user1 in "${username[@]}"
-do
-if [ "$USER" == "$user1" ]; then
-jumlah[$i]=`expr ${jumlah[$i]} + 1`;
-pid[$i]="${pid[$i]} $PID"
-fi
-i=$i+1;
+    cat /tmp/log-db.txt | grep "sshd\[$PID\]" > /tmp/log-db-pid.txt;
+    NUM=`cat /tmp/log-db-pid.txt | wc -l`;
+    USER=`cat /tmp/log-db-pid.txt | awk '{print $9}'`;
+    IP=`cat /tmp/log-db-pid.txt | awk '{print $11}'`;
+    if [ $NUM -eq 1 ]; then
+        TIME=$(date +'%H:%M:%S')
+        echo "$USER $TIME : $IP" >>/tmp/ssh2
+        i=0;
+        for user1 in "${username[@]}"
+        do
+            if [ "$USER" == "$user1" ]; then
+                jumlah[$i]=`expr ${jumlah[$i]} + 1`;
+                pid[$i]="${pid[$i]} $PID"
+            fi
+            i=$i+1;
+        done
+    fi
 done
-fi
+
+j="0"
+count=1
+for i in ${!username[*]}; do
+    limitip="0"
+    if [[ ${jumlah[$i]} -gt $limitip ]]; then
+        sship=$(cat /tmp/ssh2 | grep -w "${username[$i]}" | wc -l)
+        iplim=$(cat /etc/xray/sshx/${username[$i]}IP)
+        printf "$COLOR1│${NC}  %-4s %-13s %-10s   %-10s     $COLOR1│${NC}\n" "$count." "${username[$i]}" "$sship" "$iplim"
+        ((count++))
+    fi
 done
-j="0";
-for i in ${!username[*]}
-do
-limitip="0"
-if [[ ${jumlah[$i]} -gt $limitip ]]; then
-sship=$(cat /tmp/ssh2  | grep -w "${username[$i]}" | wc -l)
-echo -e "$COLOR1${NC} USERNAME : \033[0;33m${username[$i]}";
-echo -e "$COLOR1${NC} IP LOGIN : \033[0;33m$sship";
-echo -e ""
+
+if [ $count -eq 1 ]; then
+    echo -e "$COLOR1│${NC}  No active SSH users found                      $COLOR1│${NC}"
 fi
-done
-if [ -f "/etc/openvpn/server/openvpn-tcp.log" ]; then
-echo " "
-cat /etc/openvpn/server/openvpn-tcp.log | grep -w "^CLIENT_LIST" | cut -d ',' -f 2,3,8 | sed -e 's/,/      /g' > /tmp/vpn-login-tcp.txt
-cat /tmp/vpn-login-tcp.txt
-fi
-if [ -f "/etc/openvpn/server/openvpn-udp.log" ]; then
-echo " "
-cat /etc/openvpn/server/openvpn-udp.log | grep -w "^CLIENT_LIST" | cut -d ',' -f 2,3,8 | sed -e 's/,/      /g' > /tmp/vpn-login-udp.txt
-cat /tmp/vpn-login-udp.txt
-fi
+
 echo -e "$COLOR1╰═════════════════════════════════════════════════╯${NC}"
+
+# Check for OpenVPN TCP users
+if grep -qw "^CLIENT_LIST" /etc/openvpn/server/openvpn-tcp.log; then
+    echo -e "$COLOR1╭═════════════════════════════════════════════════╮${NC}"
+    echo -e "$COLOR1│${NC} ${COLBG1} ${WH}• OpenVPN TCP USERS • ${NC} $COLOR1│ $NC"
+    echo -e "$COLOR1╰═════════════════════════════════════════════════╯${NC}"
+    echo -e "$COLOR1╭═════════════════════════════════════════════════╮${NC}"
+    cat /etc/openvpn/server/openvpn-tcp.log | grep -w "^CLIENT_LIST" | cut -d ',' -f 2,3,8 | sed -e 's/,/ /g' > /tmp/vpn-login-tcp.txt
+    cat /tmp/vpn-login-tcp.txt
+    echo -e "$COLOR1╰═════════════════════════════════════════════════╯${NC}"
+fi
+
+# Check for OpenVPN UDP users
+if grep -qw "^CLIENT_LIST" /etc/openvpn/server/openvpn-udp.log; then
+    echo -e "$COLOR1╭═════════════════════════════════════════════════╮${NC}"
+    echo -e "$COLOR1│${NC} ${COLBG1} ${WH}• OpenVPN UDP USERS • ${NC} $COLOR1│ $NC"
+    echo -e "$COLOR1╰═════════════════════════════════════════════════╯${NC}"
+    echo -e "$COLOR1╭═════════════════════════════════════════════════╮${NC}"
+    cat /etc/openvpn/server/openvpn-udp.log | grep -w "^CLIENT_LIST" | cut -d ',' -f 2,3,8 | sed -e 's/,/ /g' > /tmp/vpn-login-udp.txt
+    cat /tmp/vpn-login-udp.txt
+    echo -e "$COLOR1╰═════════════════════════════════════════════════╯${NC}"
+fi
+
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu"
 m-sshovpn
