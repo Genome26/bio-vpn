@@ -1,5 +1,5 @@
 <p align="center">
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=43E405&random=false&width=435&lines=%22+Script+Paintech+Vpn+Tunneling+%22;%22+Paintech+VPN+Tunneling+Script+%22" alt="Typing SVG" /></a>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Fira+Code&pause=1000&color=43E405&random=false&width=435&lines=%22+Script+Bio_Hazard+Vpn+Tunneling+%22;%22+Bio_Hazard+VPN+Tunneling+Script+%22" alt="Typing SVG" /></a>
 
 <p align="center"><img src="https://img.shields.io/badge/install-autoscript vpn-success.svg">
 
