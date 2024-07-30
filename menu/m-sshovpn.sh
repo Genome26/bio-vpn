@@ -760,7 +760,7 @@ username[$i]=`echo $user | sed 's/'\''//g'`;
 jumlah[$i]=0;
 i=$i+1;
 done
-cat $LOG | grep -i dropbear | grep -i "Password auth succeeded" > /tmp/log-db.txt
+journalctl -u dropbear --since "100 minutes ago" | grep -i "Password auth succeeded" > /tmp/log-db.txt
 proc=( `ps aux | grep -i dropbear | awk '{print $2}'`);
 for PID in "${proc[@]}"
 do
