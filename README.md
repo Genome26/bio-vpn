@@ -27,7 +27,7 @@ wget https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/menu/m-update.sh
 <p align="center"><img src="https://img.shields.io/badge/owner contact -success.svg">
   
 <p align="center">
-  <a href="https://t.me/paintechvpn"><img src="https://img.icons8.com/color/30/000000/telegram-app--v1.png" alt="Telegram" style="margin-right: 15px;"></a>
-  <a href="https://www.facebook.com/paintechvpn"><img src="https://img.icons8.com/color/30/000000/facebook-new.png" alt="Facebook" style="margin-right: 15px;"></a>
-  <a href="https://wa.me/6281249063560"><img src="https://img.icons8.com/color/30/000000/whatsapp--v1.png" alt="WhatsApp"></a>
+  <a href="https://t.me/bio_hazard89"><img src="https://img.icons8.com/color/30/000000/telegram-app--v1.png" alt="Telegram" style="margin-right: 15px;"></a>
+  <a href="https://www.facebook.com/pn"><img src="https://img.icons8.com/color/30/000000/facebook-new.png" alt="Facebook" style="margin-right: 15px;"></a>
+  <a href="https://wa.me/254797264947"><img src="https://img.icons8.com/color/30/000000/whatsapp--v1.png" alt="WhatsApp"></a>
 </p>
