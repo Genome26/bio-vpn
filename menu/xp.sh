@@ -4,16 +4,15 @@ biji=`date +"%Y-%m-%d" -d "$dateFromServer"`
 #########################
 echo 1 > /proc/sys/vm/drop_caches
 data=( `cat /etc/xray/ssh | grep '^###' | cut -d ' ' -f 2 | sort | uniq`);
-now=`date +"%Y-%m-%d"`
+now=$(date +"%Y%m%d%H%M")
 for user in "${data[@]}"
 do
 pass=$(grep -w "^### $user" "/etc/xray/ssh" | cut -d ' ' -f 4 | sort | uniq)
 exp=$(grep -w "^### $user" "/etc/xray/ssh" | cut -d ' ' -f 3 | sort | uniq)
-d1=$(date -d "$exp" +%s)
-d2=$(date -d "$now" +%s)
-exp2=$(( (d1 - d2) / 86400 ))
+exp1=$(grep -w "^### $user" "/etc/xray/ssh" | cut -d ' ' -f 5 | sort | uniq)
+exp2=$((exp1 - now ))
 if [[ "$exp2" -le "0" ]]; then
-sed -i "/^### $user $exp $pass/d" /etc/xray/ssh
+sed -i "/^### $user $exp $pass.*/d" /etc/xray/ssh
 if getent passwd $user > /dev/null 2>&1; then
 userdel $user > /dev/null 2>&1
 fi
@@ -21,6 +20,7 @@ rm /home/vps/public_html/ssh-$user.txt >/dev/null 2>&1
 rm /etc/xray/sshx/${user}IP >/dev/null 2>&1
 rm /etc/xray/sshx/${user}login >/dev/null 2>&1
 fi
+systemctl restart ws-stunnel
 done
 data=( `cat /etc/xray/config.json | grep '^#vmg' | cut -d ' ' -f 2 | sort | uniq`);
 now=`date +"%Y-%m-%d"`
@@ -149,4 +149,4 @@ done
 systemctl reload ssh
 
 clear 
-read -n 1 -s -r -p "Press any key to back on menu"
+#read -n 1 -s -r -p "Press any key to back on menu"
