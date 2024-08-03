@@ -98,11 +98,13 @@ cloudfront="-"
 fi
 sleep 1
 clear
-expi=`date -d "$masaaktif days" +"%Y-%m-%d"`
+expi=$(date -d "+$masaaktif days" +"%Y-%m-%d")
+rema=$(date -d "+$masaaktif days" +"%Y-%m-%d %H:%M")
+remad=$(date -d "$rema" +"%Y%m%d%H%M")
 useradd -e `date -d "$masaaktif days" +"%Y-%m-%d"` -s /bin/false -M $Login
 exp="$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')"
 echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
-echo -e "### $Login $expi $Pass" >> /etc/xray/ssh
+echo -e "### $Login $expi $Pass $remad" >> /etc/xray/ssh
 cat > /home/vps/public_html/ssh-$Login.txt <<-END
 _______________________________
 Format SSH OVPN Account
@@ -300,10 +302,13 @@ cloudfront="Kosong"
 fi
 echo "$iplim" > /etc/xray/sshx/${Login}IP
 expi=`date -d "$hari days" +"%Y-%m-%d"`
+rema=$(date -d "+$timer minutes" +"%Y-%m-%d %H:%M")
+remad=$(date -d "$rema" +"%Y%m%d%H%M")
+echo "/usr/bin/xp" | at -t "$remad"
 useradd -e `date -d "$hari days" +"%Y-%m-%d"` -s /bin/false -M $Login
 exp="$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')"
 echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
-echo -e "### $Login $expi $Pass" >> /etc/xray/ssh
+echo -e "### $Login $expi $Pass $remad" >> /etc/xray/ssh
 tmux new-session -d -s $Login "trial ssh $Login $expi $Pass ${timer}"
 cat > /home/vps/public_html/ssh-$Login.txt <<-END
 _______________________________
