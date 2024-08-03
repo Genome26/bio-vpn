@@ -336,7 +336,7 @@ cd /usr/bin
 wget -O issue "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/install/issue.net"
 wget -O m-theme "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/menu/m-theme.sh"
 wget -O speedtest "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/install/speedtest_cli.py"
-wget -O xp "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/install/xp.sh"
+wget -O xp "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/menu/xp.sh"
 
 chmod +x issue
 chmod +x m-theme
