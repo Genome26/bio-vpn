@@ -104,6 +104,7 @@ remad=$(date -d "$rema" +"%Y%m%d%H%M")
 useradd -e `date -d "$masaaktif days" +"%Y-%m-%d"` -s /bin/false -M $Login
 exp="$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')"
 echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
+echo 'bash /usr/bin/xp' | at -t "$remad" 2>/dev/null
 echo -e "### $Login $expi $Pass $remad" >> /etc/xray/ssh
 cat > /home/vps/public_html/ssh-$Login.txt <<-END
 _______________________________
@@ -304,7 +305,7 @@ echo "$iplim" > /etc/xray/sshx/${Login}IP
 expi=`date -d "$hari days" +"%Y-%m-%d"`
 rema=$(date -d "+$timer minutes" +"%Y-%m-%d %H:%M")
 remad=$(date -d "$rema" +"%Y%m%d%H%M")
-echo "/usr/bin/xp" | at -t "$remad"
+echo 'bash /usr/bin/xp' | at -t "$remad" 2>/dev/null
 useradd -e `date -d "$hari days" +"%Y-%m-%d"` -s /bin/false -M $Login
 exp="$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')"
 echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
