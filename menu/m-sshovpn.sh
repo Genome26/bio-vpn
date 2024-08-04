@@ -69,7 +69,7 @@ echo -e "$COLOR1│${NC} ${COLBG1}              ${WH}• SSH PANEL MENU •     
 echo -e "$COLOR1╰═════════════════════════════════════════════════╯${NC}"
 echo -e "$COLOR1╭═════════════════════════════════════════════════╮${NC}"
 echo -e "$COLOR1│                                                 │"
-echo -e "$COLOR1│${WH} Nama Duplikat Silahkan Buat Nama Lain.          $COLOR1│"
+echo -e "$COLOR1│${WH} Duplicate Name Please Create Another Name.      $COLOR1│"
 echo -e "$COLOR1│                                                 │"
 echo -e "$COLOR1╰═════════════════════════════════════════════════╯${NC}"
 read -n 1 -s -r -p "Press any key to back"
