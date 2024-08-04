@@ -12,7 +12,7 @@ cd /usr/bin
 wget -O backup "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/menu/backup.sh"
 wget -O restore "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/restore.sh"
 wget -O cleaner "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/install/cleaner.sh"
-wget -O xp "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/install/xp.sh"
+wget -O xp "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/menu/xp.sh"
 chmod +x /usr/bin/backup
 chmod +x /usr/bin/restore
 chmod +x /usr/bin/cleaner
