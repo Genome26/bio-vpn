@@ -303,6 +303,9 @@ cloudfront="Kosong"
 fi
 echo "$iplim" > /etc/xray/sshx/${Login}IP
 expi=`date -d "$hari days" +"%Y-%m-%d"`
+rema=$(date -d "+$timer minutes" +"%Y-%m-%d %H:%M")
+remad=$(date -d "$rema" +"%Y%m%d%H%M")
+echo 'bash /usr/bin/xp' | at -t "$remad" 2>/dev/null
 useradd -e `date -d "$hari days" +"%Y-%m-%d"` -s /bin/false -M $Login
 exp="$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')"
 echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
