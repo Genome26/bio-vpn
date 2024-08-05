@@ -148,6 +148,7 @@ wget -q -O /usr/bin/trialtrojan "https://raw.githubusercontent.com/Genome26/bio-
 wget -q -O /usr/bin/trialssh "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/menu/trialssh.sh" && chmod +x /usr/bin/trialssh
 wget -q -O /usr/bin/autocpu "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/install/autocpu.sh" && chmod +x /usr/bin/autocpu
 wget -q -O /usr/bin/bantwidth "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/install/bantwidth" && chmod +x /usr/bin/bantwidth
+wget -q -O /usr/bin/xp "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/menu/xp.sh" && chmod +x /usr/bin/xp
 chmod +x menu
 chmod +x m-vmess
 chmod +x m-vless
