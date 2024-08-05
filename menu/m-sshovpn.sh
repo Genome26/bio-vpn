@@ -69,7 +69,7 @@ echo -e "$COLOR1│${NC} ${COLBG1}              ${WH}• SSH PANEL MENU •     
 echo -e "$COLOR1╰═════════════════════════════════════════════════╯${NC}"
 echo -e "$COLOR1╭═════════════════════════════════════════════════╮${NC}"
 echo -e "$COLOR1│                                                 │"
-echo -e "$COLOR1│${WH} Duplicate Name Please Create Another Name.      $COLOR1│"
+echo -e "$COLOR1│${WH} Nama Duplikat Silahkan Buat Nama Lain.          $COLOR1│"
 echo -e "$COLOR1│                                                 │"
 echo -e "$COLOR1╰═════════════════════════════════════════════════╯${NC}"
 read -n 1 -s -r -p "Press any key to back"
@@ -101,10 +101,10 @@ clear
 expi=$(date -d "+$masaaktif days" +"%Y-%m-%d")
 rema=$(date -d "+$masaaktif days" +"%Y-%m-%d %H:%M")
 remad=$(date -d "$rema" +"%Y%m%d%H%M")
+echo 'bash /usr/bin/xp' | at -t "$remad" 2>/dev/null
 useradd -e `date -d "$masaaktif days" +"%Y-%m-%d"` -s /bin/false -M $Login
 exp="$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')"
 echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
-echo 'bash /usr/bin/xp' | at -t "$remad" 2>/dev/null
 echo -e "### $Login $expi $Pass $remad" >> /etc/xray/ssh
 cat > /home/vps/public_html/ssh-$Login.txt <<-END
 _______________________________
@@ -303,9 +303,6 @@ cloudfront="Kosong"
 fi
 echo "$iplim" > /etc/xray/sshx/${Login}IP
 expi=`date -d "$hari days" +"%Y-%m-%d"`
-rema=$(date -d "+$timer minutes" +"%Y-%m-%d %H:%M")
-remad=$(date -d "$rema" +"%Y%m%d%H%M")
-echo 'bash /usr/bin/xp' | at -t "$remad" 2>/dev/null
 useradd -e `date -d "$hari days" +"%Y-%m-%d"` -s /bin/false -M $Login
 exp="$(chage -l $Login | grep "Account expires" | awk -F": " '{print $2}')"
 echo -e "$Pass\n$Pass\n"|passwd $Login &> /dev/null
@@ -419,7 +416,7 @@ fi
 cat> /etc/cron.d/trialssh${Login} << EOF
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-*/$timer * * * * root /usr/bin/trial ssh $Login $Pass $expi
+*/$timer * * * * root /usr/bin/trial trialssh $Login $Pass $expi
 EOF
 clear
 echo -e "$COLOR1 ◇━━━━━━━━━━━━━━━━━◇ ${NC}" | tee -a /etc/xray/sshx/akun/log-create-${Login}.log
@@ -1175,7 +1172,7 @@ echo -e " $COLOR1│ $NC  ${WH}[${COLOR1}04${WH}]${NC} ${COLOR1}• ${WH}DELETE 
 echo -e " $COLOR1│ $NC  ${WH}[${COLOR1}11${WH}]${NC} ${COLOR1}• ${WH}DELT XP${NC}         ${WH}[${COLOR1}09${WH}]${NC} ${COLOR1}• ${WH}UNLOCK LOGIN${NC}      $COLOR1 │$NC"
 echo -e " $COLOR1╰════════════════════════════════════════════════════╯${NC}"
 echo -e " $COLOR1╭═════════════════════════ ${WH}BY${NC} ${COLOR1}═══════════════════════╮ ${NC}"
-echo -e "  $COLOR1${NC}              ${WH}   • PanTech Vpn Tunneling •                 $COLOR1 $NC"
+echo -e "  $COLOR1${NC}              ${WH}   • $author •                               $COLOR1 $NC"
 echo -e " $COLOR1╰════════════════════════════════════════════════════╯${NC}"
 echo -e ""
 echo -ne " ${WH}Select menu ${COLOR1}: ${WH}"; read opt
