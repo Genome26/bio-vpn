@@ -305,7 +305,7 @@ trojan2="trojan://${uuid}@${domain}:443?path=%2Ftrojan-ws%26security=tls%26host=
 cat> /etc/cron.d/trialtrojan${user} << END
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-*/$timer * * * * root /usr/bin/trial trojan $user $uuid $exp
+*/$timer * * * * root /usr/bin/trial trialtr $user $uuid $exp
 END
 cat > /home/vps/public_html/trojan-$user.txt <<-END
 _______________________________
