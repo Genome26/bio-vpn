@@ -141,11 +141,7 @@ wget -q -O /usr/bin/bckpbot "https://raw.githubusercontent.com/Genome26/bio-vpn/
 wget -q -O /usr/bin/tendang "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/menu/tendang.sh" && chmod +x /usr/bin/tendang
 wget -q -O /usr/bin/bottelegram "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/menu/bottelegram.sh" && chmod +x /usr/bin/bottelegram
 wget -q -O /usr/bin/m-allxray "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/menu/m-allxray.sh" && chmod +x /usr/bin/m-allxray
-wget -q -O /usr/bin/xraylimit "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/menu/xraylimit.sh" && chmod +x /usr/bin/xraylimit
-wget -q -O /usr/bin/trialvmess "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/menu/trialvmess.sh" && chmod +x /usr/bin/trialvmess
-wget -q -O /usr/bin/trialvless "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/menu/trialtrojan.sh" && chmod +x /usr/bin/trialtrojan
-wget -q -O /usr/bin/trialtrojan "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/menu/trialvless.sh" && chmod +x /usr/bin/trialvless
-wget -q -O /usr/bin/trialssh "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/menu/trialssh.sh" && chmod +x /usr/bin/trialssh
+wget -q -O /usr/bin/trial "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/menu/trial.sh" && chmod +x /usr/bin/trial
 wget -q -O /usr/bin/autocpu "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/install/autocpu.sh" && chmod +x /usr/bin/autocpu
 wget -q -O /usr/bin/bantwidth "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/install/bantwidth" && chmod +x /usr/bin/bantwidth
 chmod +x menu
