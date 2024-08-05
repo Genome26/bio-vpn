@@ -476,7 +476,7 @@ sed -i '/#vmessgrpc$/a\#vmg '"$user $exp $uuid"'\
 cat> /etc/cron.d/trialvmess${user} << EOF
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-*/$timer * * * * root /usr/bin/trial vmess $user $uuid $exp
+*/$timer * * * * root /usr/bin/trial trialvm $user $uuid $exp
 EOF
 asu=`cat<<EOF
 {
