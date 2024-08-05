@@ -99,9 +99,9 @@ done
 if [[ $dns == "1" ]]; then
 clear
 echo -e  "$COLOR1╭══════════════════════════════════════════╮${NC}"
-echo -e  "$COLOR1│             ${WH}TERIMA KASIH                 $COLOR1│${NC}"
-echo -e  "$COLOR1│        ${WH}SUDAH MENGGUNAKAN SCRIPT          $COLOR1│${NC}"
-echo -e  "$COLOR1│               ${WH}DARI SAYA                  $COLOR1│${NC}"
+echo -e  "$COLOR1│             ${WH}ENTER YOUR DOMAIN $COLOR1│${NC}"
+echo -e  "$COLOR1│ ${WH}MAKE SURE IT S POINTED TO CLOUDFLARE      $COLOR1│${NC}"
+echo -e  "$COLOR1│                                                $COLOR1│${NC}"
 echo -e  "$COLOR1╰══════════════════════════════════════════╯${NC}"
 echo " "
 until [[ $dnss =~ ^[a-zA-Z0-9_.-]+$ ]]; do
