@@ -348,7 +348,7 @@ clear
 cat> /etc/cron.d/trialvless${user} << END
 SHELL=/bin/sh
 PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-*/$timer * * * * root /usr/bin/trial vless $user $uuid $exp
+*/$timer * * * * root /usr/bin/trial trialvl $user $uuid $exp
 END
 cat > /home/vps/public_html/vless-$user.txt <<-END
 _______________________________
