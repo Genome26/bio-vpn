@@ -16,7 +16,7 @@ function trialssh() {
         break
     done
 }
-function trialws() {
+function trialvm() {
     while true; do
         sleep ${timer}m
         exp=$(grep -wE "^#vm $user" "/etc/xray/config.json" | cut -d ' ' -f 3 | sort | uniq)
@@ -65,8 +65,8 @@ function trialss() {
         break
     done
 }
-if [[ ${2} == "trialws" ]]; then
-    trialws
+if [[ ${2} == "trialvm" ]]; then
+    trialvm
 elif [[ ${2} == "trialvl" ]]; then
     trialvl
 elif [[ ${2} == "trialtr" ]]; then
