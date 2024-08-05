@@ -144,6 +144,8 @@ wget -q -O /usr/bin/m-allxray "https://raw.githubusercontent.com/Genome26/bio-vp
 wget -q -O /usr/bin/trial "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/menu/trial.sh" && chmod +x /usr/bin/trial
 wget -q -O /usr/bin/autocpu "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/install/autocpu.sh" && chmod +x /usr/bin/autocpu
 wget -q -O /usr/bin/bantwidth "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/install/bantwidth" && chmod +x /usr/bin/bantwidth
+wget -q -O /usr/bin/xp "https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/menu/xp.sh" && chmod +x /usr/bin/xp
+
 chmod +x menu
 chmod +x m-vmess
 chmod +x m-vless
