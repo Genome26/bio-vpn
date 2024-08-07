@@ -502,6 +502,7 @@ fi
 done
 User=$(grep -E "^### " "/etc/xray/ssh" | cut -d ' ' -f 2 | sed -n "${CLIENT_NUMBER}"p)
 exp=$(grep -E "^### " "/etc/xray/ssh" | cut -d ' ' -f 3 | sed -n "${CLIENT_NUMBER}"p)
+timeid=$(grep -E "^### " "/etc/xray/ssh" | cut -d ' ' -f 5 | sed -n "${CLIENT_NUMBER}"p)
 Pass=$(grep -E "^### " "/etc/xray/ssh" | cut -d ' ' -f 4 | sed -n "${CLIENT_NUMBER}"p)
 egrep "^$User" /etc/passwd >/dev/null
 if [ $? -eq 0 ]; then
@@ -510,13 +511,19 @@ now=$(date +%Y-%m-%d)
 d1=$(date -d "$exp" +%s)
 d2=$(date -d "$now" +%s)
 exp2=$(( (d1 - d2) / 86400 ))
+if [ $exp2 -lt 0 ]; then
+  exp2=0
+  d1=$d2
+fi
 exp3=$(($exp2 + $Days))
+timeid1=$(date -d "+${exp3} days" '+%Y%m%d%H%M')
 exp4=`date -d "$exp3 days" +"%Y-%m-%d"`
 passwd -u $User
 usermod -e  $exp4 $User
 egrep "^$User" /etc/passwd >/dev/null
 echo -e "$Pass\n$Pass\n"|passwd $User &> /dev/null
-sed -i "s/### $User $exp/### $User $exp4/g" /etc/xray/ssh >/dev/null
+sed -i "s/### $User $exp $Pass $timeid/### $User $exp4 $Pass $timeid1/g" /etc/xray/ssh >/dev/null
+echo 'bash /usr/bin/xp' | at -t "$timeid1" 2>/dev/null
 clear
 TEXT="
 <code>◇━━━━━━━━━━━━━━◇</code>
@@ -547,7 +554,7 @@ TEXT2="
 <b>DATE   :</b> <code>${TIME2} WIB</code>
 <b>DETAIL   :</b> <code>Trx SSH </code>
 <b>USER :</b> <code>${user2}xxx </code>
-<b>DURASI  :</b> <code>$Days Hari </code>
+<b>DURASI  :</b> <code>$Days Days </code>
 <code>◇━━━━━━━━━━━━━━◇</code>
 <i>Renew Account From Server..</i>
 "
