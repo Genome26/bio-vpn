@@ -12,13 +12,18 @@ exp=$(grep -w "^### $user" "/etc/xray/ssh" | cut -d ' ' -f 3 | sort | uniq)
 exp1=$(grep -w "^### $user" "/etc/xray/ssh" | cut -d ' ' -f 5 | sort | uniq)
 exp2=$((exp1 - now ))
 if [[ "$exp2" -le "0" ]]; then
-sed -i "/^### $user $exp $pass.*/d" /etc/xray/ssh
-if getent passwd $user > /dev/null 2>&1; then
-userdel $user > /dev/null 2>&1
-fi
-rm /home/vps/public_html/ssh-$user.txt >/dev/null 2>&1
-rm /etc/xray/sshx/${user}IP >/dev/null 2>&1
-rm /etc/xray/sshx/${user}login >/dev/null 2>&1
+  # Check if the user exists
+  if getent passwd $user > /dev/null 2>&1; then
+    # Log the username and password before modifying the username
+    awk -v user="$user" '$2 == user {print $2 " " $4}' /etc/xray/ssh >> /etc/xray/expired
+    passwd -l  $user
+  else
+    # If the user doesn't exist, remove their entry from /etc/xray/ssh and /etc/xray/expired
+    sed -i "/^### $user /d" /etc/xray/ssh
+    sed -i "/^$user /d" /etc/xray/expired
+  fi
+
+  # No file removal
 fi
 systemctl restart ws-stunnel
 done
@@ -143,7 +148,7 @@ if [ $userexpireinseconds -ge $todaystime ] ;
 then
 :
 else
-userdel --force $username
+passwd -l $username
 fi
 done
 systemctl reload ssh
