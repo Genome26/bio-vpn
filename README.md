@@ -3,7 +3,7 @@
 
 <p align="center"><img src="https://img.shields.io/badge/install-autoscript vpn-success.svg">
 
-<pre><code>sudo apt-get install dos2unix -y && apt install -y && wget https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/setup.sh && chmod +x setup.sh && dos2unix setup.sh && screen -S setup ./setup.sh
+<pre><code>sudo apt-get install dos2unix -y && apt install -y && apt install screen -y && wget https://raw.githubusercontent.com/Genome26/bio-vpn/bio-vpn/setup.sh && chmod +x setup.sh && dos2unix setup.sh && screen -S setup ./setup.sh
 </code></pre>
 
 <p align="center">
