@@ -65,7 +65,7 @@ chmod +x /usr/local/bin/ws-stunnel
 # Installing Service
 cat > /etc/systemd/system/ws-stunnel.service << END
 [Unit]
-Description=Python Proxy Mod By PAINTECH 
+Description=Python Proxy Mod By Bio_hazard 
 Documentation=https://t.me/paintechvpn 
 After=network.target nss-lookup.target
 
@@ -75,7 +75,7 @@ User=root
 CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 AmbientCapabilities=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
 NoNewPrivileges=true
-ExecStart=/usr/bin/python -O /usr/local/bin/ws-stunnel
+ExecStart=/usr/bin/python3 -O /usr/local/bin/ws-stunnel
 Restart=on-failure
 
 [Install]
